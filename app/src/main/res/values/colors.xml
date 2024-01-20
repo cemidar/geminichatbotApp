@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorTopbar">#1A237E</color>
+    <color name="colorChatBackground">#FAFAFA</color>
+    <color name="colorMessageUser">#538CC5</color>
+    <color name="colorMessageAI">#53B556</color>
 </resources>
