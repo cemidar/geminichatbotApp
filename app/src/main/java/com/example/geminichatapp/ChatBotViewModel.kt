@@ -19,7 +19,7 @@ class ChatBotViewModel: ViewModel() {
     fun onEvent(event: ChatBotUiEvent){
         when (event) {
             is ChatBotUiEvent.sendChatMsg -> {
-                if (chatBotState.value.chatmsg.isNotEmpty()) {
+                if (event.ChatMsg.isNotEmpty()) {
                     addChatMsg(event.ChatMsg, event.ChatImage)
 
                     //if user sends only message with or without an image
@@ -43,7 +43,7 @@ class ChatBotViewModel: ViewModel() {
         _chatBotState.update {
             it.copy(
                 chatList = it.chatList.toMutableList().apply {
-                    add(0, ChatBot(chatmsg, chatImage, isFromUser = true))
+                    add(0, ChatBot(chatmsg, chatImage, true))
                 },
                 //after sending a message this will clear the input field.
                 chatmsg = "",
@@ -69,7 +69,7 @@ class ChatBotViewModel: ViewModel() {
     //Get Response with an image from user
     private fun getResponseWithImage(chatmsg: String, chatImage: Bitmap) {
         viewModelScope.launch {
-            val chat = ChatBotData.getResponse(chatmsg)
+            val chat = ChatBotData.getResponseWithImage(chatmsg, chatImage)
             _chatBotState.update {
                 it.copy(
                     chatList = it.chatList.toMutableList().apply {

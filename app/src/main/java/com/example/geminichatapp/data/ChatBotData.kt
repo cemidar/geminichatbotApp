@@ -11,14 +11,14 @@ object ChatBotData {
     val api_key = "AIzaSyCUza5mj5aFHwEiVCt9_eYY8Wd9X6W5ybk";
 
     //
-    suspend fun getResponse(prompt: String): ChatBot {
+    suspend fun getResponse(chatmsg: String): ChatBot {
         val generativeModel = GenerativeModel(
             modelName = "gemini-pro", apiKey = api_key
         )
 
         try {
             val response = withContext(Dispatchers.IO) {
-                generativeModel.generateContent(prompt)
+                generativeModel.generateContent(chatmsg)
             }
 
             return ChatBot(
