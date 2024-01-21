@@ -138,8 +138,7 @@ class MainActivity : ComponentActivity() {
                     .padding(horizontal = 8.dp),
                 reverseLayout = true //for chat look-like ui
             ) {
-                itemsIndexed(chatBotState.chatList){
-                    index, chat ->
+                itemsIndexed(chatBotState.chatList){ index, chat ->
                     // User's message
                     if (chat.isFromUser){
                         UserChatItem(chatMsg = chat.chatmsg, chatImage = chat.chatImage)
@@ -161,8 +160,7 @@ class MainActivity : ComponentActivity() {
                     chatImage?.let {
                         Image(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(40.dp)
+                                .size(40.dp)
                                 .padding(bottom = 2.dp)
                                 .clip(RoundedCornerShape(6.dp)),
                             contentDescription = "Picked image",
@@ -190,7 +188,9 @@ class MainActivity : ComponentActivity() {
                 
                 Spacer(modifier = Modifier.width(8.dp))
                 
-                TextField(value = chatBotState.chatmsg,
+                TextField(
+                    modifier = Modifier.weight(1f),
+                    value = chatBotState.chatmsg,
                     onValueChange = {
                         chatBotViewModel.onEvent(ChatBotUiEvent.updateChatMsg(it))
                     },
@@ -211,6 +211,7 @@ class MainActivity : ComponentActivity() {
                                     chatBotState.chatImage
                                 )
                             )
+                            uriState.update { "" } //update after sending a message
                         },
                     imageVector = Icons.Rounded.Send,
                     contentDescription = "Send",
