@@ -12,4 +12,6 @@
     <color name="colorChatBackground">#FAFAFA</color>
     <color name="colorMessageUser">#538CC5</color>
     <color name="colorMessageAI">#53B556</color>
+
+    <color name="colorSplashScreen">#609EE9</color>
 </resources>

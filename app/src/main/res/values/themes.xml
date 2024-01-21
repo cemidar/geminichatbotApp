@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.GeminichatApp" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/colorSplashScreen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ailogo</item>
+        <item name="postSplashScreenTheme">@style/Theme.GeminichatApp</item>
+    </style>
+
 </resources>
