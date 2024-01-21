@@ -26,9 +26,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.rounded.AddPhotoAlternate
 import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -39,6 +41,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -74,14 +77,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GeminichatAppTheme {
-                // A surface container using the 'background' color from the theme
+                // A surface container
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = colorResource(id = R.color.colorChatBackground)
                 ) {
                     //Topbar
                     Scaffold(
-                        // Top bar without menu so far //TODO: menu
                         topBar = {
                             Box(
                                 modifier = Modifier
@@ -90,13 +92,23 @@ class MainActivity : ComponentActivity() {
                                     .height(55.dp)
                                     .padding(horizontal = 16.dp)
                             ) {
-                                Text(
-                                    modifier = Modifier
-                                        .align(Alignment.CenterStart),
-                                    text = "Gemini AI ChatBot",
-                                    fontSize = 25.sp,
-                                    color = MaterialTheme.colorScheme.onPrimary
-                                )
+                                Row(
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "Gemini AI ChatBot",
+                                        fontSize = 25.sp,
+                                        color = MaterialTheme.colorScheme.onPrimary,
+                                        modifier = Modifier.weight(1f) // text will take the rest of the place
+                                    )
+                                    //Spacer(modifier = Modifier.width(16.dp))
+                                    IconButton(onClick = {
+                                        // TODO: OpenMenu() function
+                                    }) {
+                                        Icon(Icons.Filled.Menu, contentDescription = "Menu", tint = Color.White)
+                                    }
+                                }
                             }
                         }
                     ) {
@@ -193,9 +205,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .size(40.dp)
                         .clickable {
-                           chatBotViewModel.onEvent(
-                               ChatBotUiEvent.sendChatMsg(chatBotState.chatmsg, chatBotState.chatImage)
-                           )
+                            chatBotViewModel.onEvent(
+                                ChatBotUiEvent.sendChatMsg(
+                                    chatBotState.chatmsg,
+                                    chatBotState.chatImage
+                                )
+                            )
                         },
                     imageVector = Icons.Rounded.Send,
                     contentDescription = "Send",
@@ -273,4 +288,5 @@ class MainActivity : ComponentActivity() {
 
         return null //Failed Async
     }
+
 }
